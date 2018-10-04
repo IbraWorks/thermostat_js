@@ -1,3 +1,4 @@
+'use strict';
 function Thermostat() {
   this.temp = 20;
   this.MINIMUM_TEMP = 10;
@@ -6,7 +7,7 @@ function Thermostat() {
 }
 
 Thermostat.prototype.up = function () {
-  if (this.powerSavingModeOn === true && this.temp >= 25) {
+  if (this.powerSavingModeOn && this.temp >= 25) {
     throw new Error('Power saving mode is On, Cannot increase above 25 degrees')
   } else if (this.temp >= this.MAXIMUM_TEMP){
     throw new Error(`Power saving mode is Off, Cannot increase above ${this.MAXIMUM_TEMP} degrees`)
