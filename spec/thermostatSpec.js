@@ -37,9 +37,9 @@ describe('Thermostat', function(){
       expect(thermostat.temp).toEqual(21);
     })
 
-    it ('should not increase temp above 25 degrees if power saving mode is On', function(){
-      thermostat.temp = 25
-      expect(function(){thermostat.up();}).toThrowError('Power saving mode is On, Cannot increase above 25 degrees')
+    it ('should not increase temp above max psm temp degrees if power saving mode is On', function(){
+      thermostat.temp = thermostat.maxPowerSavingModeTemp;
+      expect(function(){thermostat.up();}).toThrowError(`Power saving mode is On, Cannot increase above ${thermostat.maxPowerSavingModeTemp} degrees`)
     })
 
     it ('should not increase temp above max temp if power saving mode is Off', function(){
@@ -95,6 +95,25 @@ describe('Thermostat', function(){
         expect(thermostat.energyUsageStatus()).toEqual('High energy usage')
       })
     });
-    
+    describe('turnPowerSavingModeOn', () => {
+        it('turns power saving mode on', () => {
+            thermostat.powerSavingModeOn = false;
+            thermostat.turnPowerSavingModeOn();
+            expect(thermostat.powerSavingModeOn).toEqual(true)
+        });
+        it('sets the temp to max allowed temp when psm is on if the temp is above that value', () => {
+            thermostat.powerSavingModeOn = false;
+            thermostat.temp = thermostat.maxPowerSavingModeTemp + 1;
+            thermostat.turnPowerSavingModeOn();
+            expect(thermostat.temp).toEqual(thermostat.maxPowerSavingModeTemp);
+        });
+    });
+
+    describe('turnPowerSavingModeOff', () => {
+        it('turns power saving mode off', () => {
+            thermostat.turnPowerSavingModeOff();
+            expect(thermostat.powerSavingModeOn).toEqual(false)
+        });
+    });
   });
 });
