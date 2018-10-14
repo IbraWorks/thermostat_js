@@ -1,0 +1,12 @@
+
+.low-energy-usage{
+    background-color: green;
+}
+
+.medium-energy-usage{
+    background-color: yellow;
+}
+
+.high-energy-usage{
+    background-color: red;
+}

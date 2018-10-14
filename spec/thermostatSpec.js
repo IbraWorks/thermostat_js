@@ -78,21 +78,21 @@ describe('Thermostat', function(){
     describe ('when the temperature is below 18 degrees',function() {
       it ('should indicate low usage', function() {
         thermostat.temp = 17
-        expect(thermostat.energyUsageStatus()).toEqual('Low energy usage')
+        expect(thermostat.energyUsageStatus()).toEqual('low-energy-usage')
       })
     });
 
     describe ('when the temperature is above 18 and below 25 degrees',function() {
       it ('should indicate medium usage', function() {
         thermostat.temp = 23
-        expect(thermostat.energyUsageStatus()).toEqual('Medium energy usage')
+        expect(thermostat.energyUsageStatus()).toEqual( 'medium-energy-usage')
       })
     });
 
     describe ('when the temperature is anything else',function() {
       it ('should indicate high usage', function() {
         thermostat.temp = 45
-        expect(thermostat.energyUsageStatus()).toEqual('High energy usage')
+        expect(thermostat.energyUsageStatus()).toEqual('high-energy-usage')
       })
     });
     describe('turnPowerSavingModeOn', () => {
